@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import ContexPoke from './components/ContexPoke';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	const [listPoke, setListPoke] = useState([]);
+
+	useEffect(() => {
+		fetch('https://pokeapi.co/api/v2/pokemon', {
+			method: 'GET',
+		}).then((response) =>
+			response.json().then((data) => {
+				setListPoke(data.results);
+			})
+		);
+	}, []);
+
+	return (
+		<div className='container'>
+			<ContexPoke listPoke={listPoke} />
+		</div>
+	);
+};
 
 export default App;
