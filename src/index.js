@@ -1,23 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './styles.css';
-import {createBrowserRouter, RouterProvider, Route, Link} from 'react-router-dom';
-import App from './App';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import ListPokemons from './components/ListPokemons/ListPokemons';
+import reportWebVitals from './reportWebVitals';
+import './index.css';
+import CardDetail from './components/CardDetails/CardDetail';
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <App />,
+		element: <ListPokemons />,
 	},
+
 	{
-		path: '/pokemon',
-		element: <App />,
-	},
-	{
-		path: 'about',
-		element: <div>About</div>,
+		path: '/pokemon/:pokeId',
+		element: <CardDetail />,
 	},
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<RouterProvider router={router} />);
+root.render(
+	<React.StrictMode>
+		<RouterProvider router={router} />
+	</React.StrictMode>
+);
+
+reportWebVitals();
